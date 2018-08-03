@@ -1,0 +1,43 @@
+.field {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: black;
+    width: 90vh;
+    height: 90vh;
+}
+
+.field__block {
+    width: 5vh;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.snake-head {
+    height: 50%;
+    width: 50%;
+    border-radius: 50%;
+    background-color: yellowgreen;
+}
+
+.snake-body {
+    height: 33%;
+    width: 33%;
+    border-radius: 50%;
+    background-color: yellowgreen;
+}
+
+.snake-tail {
+    height: 25%;
+    width: 25%;
+    border-radius: 50%;
+    background-color: yellowgreen;
+}
+
+.frog {
+    height: 33%;
+    width: 33%;
+    border-radius: 50%;
+    background-color: darkgreen;
+}
