@@ -5,6 +5,7 @@ export default class Menu {
         this.startGameButton = this.createStartGameButton();
         this.stopGameButton = this.createStopGameButton();
         this.menu = this.createMenu();
+        this.score = 0;
     }
 
     createMenu() {

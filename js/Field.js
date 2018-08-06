@@ -37,6 +37,12 @@ export default class Field {
     putSnakeOnField() {
         this.field.children[this.snake.tail].classList.add('snake-tail');
         this.field.children[this.snake.head].classList.add('snake-head');
+        if(this.field.children[this.snake.head].classList.contains('frog')) {
+            this.menu.score++;
+            console.log(this.menu.score);
+            this.field.children[this.snake.head].classList.remove('frog');
+            this.putFrogOnField();
+        }
     }
 
     putFrogOnField() {
@@ -73,13 +79,10 @@ export default class Field {
             }
         }
         this.putSnakeOnField();
-        console.log(this.snake.tail, this.snake.head);
     }
 
     startGame() {
-        console.log('started');
         this.game = setInterval(this.moveSnake.bind(this), this.snakeInterval);
-
     }
 
     stopGame() {
