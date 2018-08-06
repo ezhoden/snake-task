@@ -1,6 +1,6 @@
 
 
-class Frog {
+export default class Frog {
     constructor() {
         
     }

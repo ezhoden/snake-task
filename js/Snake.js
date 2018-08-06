@@ -4,12 +4,43 @@ import SnakeTail from "./SnakeTail";
 
 export default class Snake {
     constructor() {
-        this.head = new SnakeHead();
+        this.head = 1;
         this.body = [];
-        this.tail = new SnakeTail();
+        this.tail = 0;
+        this.previousTail = 0;
+        this.direction = 'ArrowRight';
+    }
+
+    moveRight() {
+        if (this.body.length === 0) {
+            this.tail = this.head;
+        }
+        this.head++;
+    }
+
+    moveLeft() {
+        if (this.body.length === 0) {
+            this.tail = this.head;
+        }
+        this.head--;
+    }
+
+    moveUp() {
+        if (this.body.length === 0) {
+            this.tail = this.head;
+        }
+        this.head -= 18;
+    }
+
+    moveDown() {
+        if (this.body.length === 0) {
+            this.tail = this.head;
+        }
+        this.head += 18;
     }
 
     increaseSnake() {
-        this.body.push(new SnakeBody());
+        this.body.push(this.tail);
+        this.tail = this.previousTail;
     }
 }

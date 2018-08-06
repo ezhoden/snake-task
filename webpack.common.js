@@ -32,7 +32,8 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            filename: 'index.html'
+            filename: 'index.html',
+            title: 'Snake task'
         }),
         new MiniCssExtractPlugin({
             filename: "[name].[hash].css",

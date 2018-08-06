@@ -1,11 +1,21 @@
 import { random } from 'lodash';
+import Snake from './Snake';
+import Frog from './Frog';
+import Menu from './Menu';
 
 export default class Field {
     constructor() {
+        this.menu = new Menu();
         this.field = this.createField();
+        this.snake = new Snake();
+        this.frog = new Frog();
+        this.game;
+        this.snakeInterval = 100;
         this.fillField();
         this.putSnakeOnField();
         this.putFrogOnField();
+        this.setControlButtons();
+        document.addEventListener('keydown', this.changeSnakeMovingirection.bind(this));
     }
 
     createField() {
@@ -25,24 +35,12 @@ export default class Field {
     }
 
     putSnakeOnField() {
-        const fieldBlockForSnakeTail = this.field.children[0];
-        const snakeTail = document.createElement('div');
-
-        snakeTail.classList.add('snake-tail');
-        fieldBlockForSnakeTail.appendChild(snakeTail);
-
-        const fieldBlockForSnakeHead = this.field.children[1];
-        const snakeHead = document.createElement('div');
-
-        snakeHead.classList.add('snake-head');
-        fieldBlockForSnakeHead.appendChild(snakeHead);
+        this.field.children[this.snake.tail].classList.add('snake-tail');
+        this.field.children[this.snake.head].classList.add('snake-head');
     }
 
     putFrogOnField() {
-        const fieldBlockForFrog = this.getEmptyFieldBlock();
-        const frog = document.createElement('div');
-        frog.classList.add('frog');
-        fieldBlockForFrog.appendChild(frog);
+        this.getEmptyFieldBlock().classList.add('frog');
     }
 
     removeCurrentFrog(index) {
@@ -51,6 +49,55 @@ export default class Field {
 
     getEmptyFieldBlock() {
         const block = this.field.children[random(this.field.children.length - 1, false)]
-        return block.innerHTML === '' ? block : this.getEmptyFieldBlock();
+        return block.classList.length === 1 ? block : this.getEmptyFieldBlock();
+    }
+
+    moveSnake() {
+        this.clearBlocksWithSnake();
+        switch(this.snake.direction) {
+            case 'ArrowRight': {
+                this.snake.moveRight();
+                break;
+            }
+            case 'ArrowLeft': {
+                this.snake.moveLeft();
+                break;
+            }
+            case 'ArrowUp': {
+                this.snake.moveUp();
+                break;
+            }
+            case 'ArrowDown': {
+                this.snake.moveDown();
+                break;
+            }
+        }
+        this.putSnakeOnField();
+        console.log(this.snake.tail, this.snake.head);
+    }
+
+    startGame() {
+        console.log('started');
+        this.game = setInterval(this.moveSnake.bind(this), this.snakeInterval);
+
+    }
+
+    stopGame() {
+       clearInterval(this.game);
+    }
+
+    setControlButtons() {
+        this.menu.startGameButton.addEventListener('click', this.startGame.bind(this));
+        this.menu.stopGameButton.addEventListener('click', this.stopGame.bind(this));
+    }
+
+    clearBlocksWithSnake() {
+        this.field.children[this.snake.tail].classList.remove('snake-tail');
+        this.field.children[this.snake.head].classList.remove('snake-head');
+    }
+
+    changeSnakeMovingirection(e) {
+        if(e.key === 'ArrowRight' || e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'ArrowDown')
+        this.snake.direction = e.key;
     }
 }
