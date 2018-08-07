@@ -4,14 +4,16 @@ export default class Menu {
     constructor() {
         this.startGameButton = this.createStartGameButton();
         this.stopGameButton = this.createStopGameButton();
-        this.menu = this.createMenu();
         this.score = 0;
+        this.scoreBoard = this.createScore();
+        this.menu = this.createMenu();
     }
 
     createMenu() {
         const menu = document.createElement('div');
         menu.appendChild(this.startGameButton);
         menu.appendChild(this.stopGameButton);
+        menu.appendChild(this.scoreBoard)
         document.querySelectorAll('body')[0].appendChild(menu);
         return menu;
     }
@@ -28,5 +30,16 @@ export default class Menu {
         stopGameButton.classList.add('menu__button');
         stopGameButton.textContent = 'Stop';
         return stopGameButton;
+    }
+
+    createScore() {
+        const scoreBoard = document.createElement('div');
+        scoreBoard.classList.add('score-board');
+        scoreBoard.textContent = `Score: ${this.score}`;
+        return scoreBoard;
+    }
+
+    changeScore() {
+        this.scoreBoard.textContent = `Score: ${this.score}`;
     }
 }

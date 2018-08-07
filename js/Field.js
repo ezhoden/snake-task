@@ -35,14 +35,12 @@ export default class Field {
     }
 
     putSnakeOnField() {
-        // console.log('inside put', this.snake.head, this.snake.tail)
         if(this.field.children[this.snake.head].classList.contains('frog')) {
             this.menu.score++;
-            console.log(this.menu.score);
+            this.menu.changeScore();
             this.field.children[this.snake.head].classList.remove('frog');
             this.putFrogOnField();
             this.snake.increaseSnake();
-            console.log('length inside', this.snake.body)
         }
         this.field.children[this.snake.tail].classList.add('snake-tail');
         console.log('length outside', this.snake.body)
@@ -62,9 +60,7 @@ export default class Field {
     }
 
     moveSnake() {
-        // console.log('before clear', this.snake.head, this.snake.tail)
         this.clearBlocksWithSnake();
-        // console.log('after clear', this.snake.head, this.snake.tail)
         switch(this.snake.direction) {
             case 'ArrowRight': {
                 this.snake.moveRight();
@@ -83,9 +79,7 @@ export default class Field {
                 break;
             }
         }
-        // console.log('before put', this.snake.head, this.snake.tail)
         this.putSnakeOnField();
-        // console.log('after put', this.snake.head, this.snake.tail)
     }
 
     startGame() {
