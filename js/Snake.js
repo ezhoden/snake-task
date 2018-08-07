@@ -49,7 +49,6 @@ export default class Snake {
 
     moveBody() {
         for (var i = this.body.length - 1; i > 0; i--) {
-            console.log('moving body', i);
             this.body[i] = this.body[i - 1];
         }
         if (this.body.length > 0) {
@@ -58,7 +57,6 @@ export default class Snake {
     }
 
     increaseSnake() {
-        console.log('increased')
         this.body.push(this.tail);
         // this.tail = this.previousTail;
     }
