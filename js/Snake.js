@@ -12,35 +12,54 @@ export default class Snake {
     }
 
     moveRight() {
-        if (this.body.length === 0) {
-            this.tail = this.head;
-        }
+        this.moveTail();
+        this.moveBody();
         this.head++;
     }
 
     moveLeft() {
-        if (this.body.length === 0) {
-            this.tail = this.head;
-        }
+        this.moveTail();
+        this.moveBody();
         this.head--;
     }
 
     moveUp() {
-        if (this.body.length === 0) {
-            this.tail = this.head;
-        }
+        this.moveTail();
+        this.moveBody();
         this.head -= 18;
     }
 
     moveDown() {
-        if (this.body.length === 0) {
-            this.tail = this.head;
-        }
+        this.moveTail();
+        this.moveBody();
         this.head += 18;
     }
 
+    moveTail() {
+        // console.log('moved', this.head, this.tail, 'length', this.body.length)
+        this.previousTail = this.tail;
+        if (this.body.length === 0) {
+            // console.log('empty body')
+            this.tail = this.head;
+        } else {
+            // console.log('not empty body')
+            this.tail = this.body[this.body.length - 1];
+        }
+    }
+
+    moveBody() {
+        for (var i = this.body.length - 1; i > 0; i--) {
+            console.log('moving body', i);
+            this.body[i] = this.body[i - 1];
+        }
+        if (this.body.length > 0) {
+            this.body[0] = this.head;
+        }
+    }
+
     increaseSnake() {
+        console.log('increased')
         this.body.push(this.tail);
-        this.tail = this.previousTail;
+        // this.tail = this.previousTail;
     }
 }

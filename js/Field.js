@@ -35,22 +35,25 @@ export default class Field {
     }
 
     putSnakeOnField() {
-        this.field.children[this.snake.tail].classList.add('snake-tail');
-        this.field.children[this.snake.head].classList.add('snake-head');
+        // console.log('inside put', this.snake.head, this.snake.tail)
         if(this.field.children[this.snake.head].classList.contains('frog')) {
             this.menu.score++;
             console.log(this.menu.score);
             this.field.children[this.snake.head].classList.remove('frog');
             this.putFrogOnField();
+            this.snake.increaseSnake();
+            console.log('length inside', this.snake.body)
         }
+        this.field.children[this.snake.tail].classList.add('snake-tail');
+        console.log('length outside', this.snake.body)
+        for (var i = 0; i < this.snake.body.length; i++) {
+            this.field.children[this.snake.body[i]].classList.add('snake-body');
+        }
+        this.field.children[this.snake.head].classList.add('snake-head');
     }
 
     putFrogOnField() {
         this.getEmptyFieldBlock().classList.add('frog');
-    }
-
-    removeCurrentFrog(index) {
-        this.field.children[index].innerHTML = '';
     }
 
     getEmptyFieldBlock() {
@@ -59,7 +62,9 @@ export default class Field {
     }
 
     moveSnake() {
+        // console.log('before clear', this.snake.head, this.snake.tail)
         this.clearBlocksWithSnake();
+        // console.log('after clear', this.snake.head, this.snake.tail)
         switch(this.snake.direction) {
             case 'ArrowRight': {
                 this.snake.moveRight();
@@ -78,7 +83,9 @@ export default class Field {
                 break;
             }
         }
+        // console.log('before put', this.snake.head, this.snake.tail)
         this.putSnakeOnField();
+        // console.log('after put', this.snake.head, this.snake.tail)
     }
 
     startGame() {
@@ -96,6 +103,9 @@ export default class Field {
 
     clearBlocksWithSnake() {
         this.field.children[this.snake.tail].classList.remove('snake-tail');
+        for (var i = 0; i < this.snake.body.length; i++) {
+            this.field.children[this.snake.body[i]].classList.remove('snake-body');
+        }
         this.field.children[this.snake.head].classList.remove('snake-head');
     }
 
