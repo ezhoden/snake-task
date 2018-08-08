@@ -36,13 +36,10 @@ export default class Snake {
     }
 
     moveTail() {
-        // console.log('moved', this.head, this.tail, 'length', this.body.length)
         this.previousTail = this.tail;
         if (this.body.length === 0) {
-            // console.log('empty body')
             this.tail = this.head;
         } else {
-            // console.log('not empty body')
             this.tail = this.body[this.body.length - 1];
         }
     }
@@ -58,6 +55,5 @@ export default class Snake {
 
     increaseSnake() {
         this.body.push(this.tail);
-        // this.tail = this.previousTail;
     }
 }
