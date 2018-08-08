@@ -63,10 +63,6 @@ export default class Field {
         return this.isEmptyBlock(block) ? this.getEmptyFieldBlockIndex() : blockIndex;
     }
 
-    getRandomNearIndex() {
-        
-    }
-
     getEmptyNearbyFieldBlockIndex() {
         const shuffled = shuffle([1, -1, 18, -18]);
         var block;
@@ -75,7 +71,7 @@ export default class Field {
             index = this.frog.position + shuffled[i];
             block = this.field[index]
             console.log(block)
-            if (this.isEmptyBlock.bind(this, block) && index >= 0) {
+            if (this.isEmptyBlock.bind(this, block) && index >= 0 && index < this.field.children.length) {
                 console.log('empty', this.frog.position + shuffled[i])
                 return index;
             }
@@ -85,33 +81,44 @@ export default class Field {
     }
 
     isEmptyBlock(block) {
-        return 
-            !(block.classList.contains('snake-body') ||
+        return
+        !(block.classList.contains('snake-body') ||
             block.classList.contains('snake-head') ||
             block.classList.contains('snake-tail'))
     }
 
     moveSnake() {
-        this.clearBlocksWithSnake();
-        switch (this.snake.direction) {
-            case 'ArrowRight': {
-                this.snake.moveRight();
-                break;
+        try {
+            this.clearBlocksWithSnake();
+            switch (this.snake.direction) {
+                case 'ArrowRight': {
+                    if ((this.snake.head + 1) % 18 === 0) {
+                        throw Error;
+                    }
+                    this.snake.moveRight();
+                    break;
+                }
+                case 'ArrowLeft': {
+                    if (this.snake.head % 18 === 0) {
+                        throw Error;
+                    }
+                    this.snake.moveLeft();
+                    break;
+                }
+                case 'ArrowUp': {
+                    this.snake.moveUp();
+                    break;
+                }
+                case 'ArrowDown': {
+                    this.snake.moveDown();
+                    break;
+                }
             }
-            case 'ArrowLeft': {
-                this.snake.moveLeft();
-                break;
-            }
-            case 'ArrowUp': {
-                this.snake.moveUp();
-                break;
-            }
-            case 'ArrowDown': {
-                this.snake.moveDown();
-                break;
-            }
+            this.putSnakeOnField();
+        } catch (e) {
+            alert('LOSED!');
+            this.stopGame();
         }
-        this.putSnakeOnField();
     }
 
     startGame() {
@@ -136,28 +143,6 @@ export default class Field {
             this.field.children[this.snake.body[i]].classList.remove('snake-body');
         }
         this.field.children[this.snake.head].classList.remove('snake-head');
-    }
-
-    possibleToMove(index) {
-        console.log(this.isEmptyBlock(this.field.children[index + 1]))
-        switch (index) {
-            case this.isEmptyBlock(this.field.children[index + 1]):
-            console.log('kek1')
-                return index + 1;
-                break;
-            case this.isEmptyBlock(this.field.children[index - 1]):
-            console.log('kek2')
-                return index - 1;
-            case this.isEmptyBlock(this.field.children[index + 18]):
-            console.log('kek3')
-                return index + 18;
-            case this.isEmptyBlock(this.field.children[index - 18]):
-            console.log('kek4')
-                return index - 18;
-            default:
-            console.log('kek false')
-                return false;
-        }
     }
 
     moveFrog() {
