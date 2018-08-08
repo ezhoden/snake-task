@@ -116,7 +116,6 @@ export default class Field {
             }
             this.putSnakeOnField();
         } catch (e) {
-            alert('LOSED!');
             this.stopGame();
         }
     }
@@ -130,6 +129,7 @@ export default class Field {
         this.game.forEach(interval => {
             clearInterval(interval);
         });
+        alert(`GAME OVER \nScore: ${this.menu.score}`);
     }
 
     setControlButtons() {
