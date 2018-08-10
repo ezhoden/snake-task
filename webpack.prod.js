@@ -12,5 +12,12 @@ module.exports = merge(common, {
         splitChunks: {
             chunks: 'all'
         }
-    }
+    },
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: "[name].[hash].css",
+            chunkFilename: "[id].[hash].css"
+        }),
+        new OptimizeCssAssetsPlugin()
+    ]
 });

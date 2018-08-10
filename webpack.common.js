@@ -1,10 +1,9 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-    entry: './js/index.js',
+    entry: './src/assets/js/index.js',
     output: {
         filename: '[name].js',
         path: path.resolve(__dirname, 'dist')
@@ -33,12 +32,8 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            title: 'Snake task'
-        }),
-        new MiniCssExtractPlugin({
-            filename: "[name].[hash].css",
-            chunkFilename: "[id].[hash].css"
-        }),
-        new OptimizeCssAssetsPlugin()
+            title: 'Snake task',
+            template: 'src/index.html'
+        })
     ]
 };
