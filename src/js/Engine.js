@@ -9,9 +9,10 @@ export default class Engine {
         });
     }
 
-    renderField(snake, frog) {
+    renderField(score, snake, frog) {
         this.renderSnake(snake);
         this.renderFrog(frog);
+        this.renderScore(score.score);
     }
 
     renderSnake(snake) {
@@ -26,9 +27,13 @@ export default class Engine {
         this.field[frog.position].classList.add('frog');
     }
 
-    updateField(snake, frog) {
+    renderScore(score) {
+        document.getElementById('score').innerText = score;
+    }
+
+    updateField(score, snake, frog) {
         this.clearField();
-        this.renderField(snake, frog);
+        this.renderField(score, snake, frog);
     }
 
     gameOverAlert(score) {

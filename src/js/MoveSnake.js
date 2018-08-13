@@ -1,6 +1,6 @@
 export default class MoveSnake {
-    constructor(fieldSize, gameGuard, snake) {
-        this.fieldSize = fieldSize;
+    constructor(config, gameGuard, snake) {
+        this.config = config;
         this.gameGuard = gameGuard;
         this.snake = snake;
     }
@@ -12,19 +12,23 @@ export default class MoveSnake {
     }
 
     getNewHeadPosition() {
-        switch(this.snake.direction) {
-            case 'ArrowRight': {
-                return this.gameGuard.isValidSnakeDirection() ? this.snake.head + 1 : -1;
+        if (this.gameGuard.isValidSnakeDirection()) {
+            switch (this.snake.direction) {
+                case this.snake.directions.right: {
+                    return this.snake.head + 1;
+                }
+                case this.snake.directions.left: {
+                    return this.snake.head - 1;
+                }
+                case this.snake.directions.up: {
+                    return this.snake.head - Math.sqrt(this.config.fieldSize);
+                }
+                case this.snake.directions.down: {
+                    return this.snake.head + Math.sqrt(this.config.fieldSize);
+                }
             }
-            case 'ArrowLeft': {
-                return this.gameGuard.isValidSnakeDirection() ? this.snake.head - 1 : -1;
-            }
-            case 'ArrowUp': {
-                return this.gameGuard.isValidSnakeDirection() ? this.snake.head - Math.sqrt(this.fieldSize) : -1;
-            }
-            case 'ArrowDown': {
-                return this.gameGuard.isValidSnakeDirection() ? this.snake.head + Math.sqrt(this.fieldSize) : -1;
-            }
+        } else {
+            throw Error;
         }
     }
 

@@ -11,14 +11,6 @@ export default class Menu {
         button.addEventListener('click', func);
     }
 
-    increaseScore() {
-        this.score.innerText++;
-    }
-
-    resetScore() {
-        this.score.innerText = 0;
-    }
-
     enableStartButton() {
         this.startButton.classList.replace('menu__button_disabled', 'menu__button_enabled');
         this.startButton.disabled = false;
