@@ -10,8 +10,8 @@ import MoveFrog from './MoveFrog';
 
 
 const config = {
-    fieldSize: 324,
-    snakeInterval: 100,
+    fieldSize: 100,
+    snakeInterval: 150,
     frogInterval: 3000
 }
 

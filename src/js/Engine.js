@@ -16,11 +16,95 @@ export default class Engine {
     }
 
     renderSnake(snake) {
-        this.field[snake.tail].classList.add('snake-tail');
-        for (var i = 0; i < snake.body.length; i++) {
-            this.field[snake.body[i]].classList.add('snake-body');
+        this.renderSnakeTail(snake);
+        this.renderSnakeBody(snake);
+        this.renderSnakeHead(snake);
+    }
+
+    renderSnakeTail(snake) {
+        this.field[snake.tail].classList.add('snake');
+        const fieldSqrt = Math.sqrt(this.field.length);
+        let partBeforeTail;
+        if (snake.body.length === 0) {
+            partBeforeTail = snake.head;
+        } else {
+            partBeforeTail = snake.body[snake.body.length - 1];
         }
-        this.field[snake.head].classList.add('snake-head');
+        const differenceBetweenTailAndPreviousPartOfSnake = snake.tail - partBeforeTail;
+        switch (differenceBetweenTailAndPreviousPartOfSnake) {
+            case 1:
+                this.field[snake.tail].classList.add('snake-tail_left');
+                break;
+            case -1:
+                this.field[snake.tail].classList.add('snake-tail_right');
+                break;
+            case fieldSqrt:
+                this.field[snake.tail].classList.add('snake-tail_up');
+                break;
+            case -fieldSqrt:
+                this.field[snake.tail].classList.add('snake-tail_down');
+                break;
+        }
+    }
+
+    renderSnakeBody(snake) {
+        const arr = Array.from(snake.body);
+        arr.unshift(snake.head);
+        arr.push(snake.tail);
+        const fieldSqrt = Math.sqrt(this.field.length);
+        for (var i = 1; i < arr.length - 1; i++) {
+            this.field[snake.body[i - 1]].classList.add('snake');
+            const prev = arr[i - 1];
+            const curr = arr[i];
+            const next = arr[i + 1];
+            const diff = prev - next;
+            switch (diff) {
+                case prev - curr === -1 && fieldSqrt - 1:
+                case prev - curr === -fieldSqrt && -(fieldSqrt - 1):
+                    this.field[snake.body[i - 1]].classList.add('snake-body_left-up');
+                    break;
+                case curr - next === -fieldSqrt && -(fieldSqrt + 1):
+                case prev - curr === fieldSqrt && fieldSqrt + 1:
+                    this.field[snake.body[i - 1]].classList.add('snake-body_left-down');
+                    break;
+                case prev - curr === 1 &&  fieldSqrt + 1:
+                case prev - curr === -fieldSqrt && -(fieldSqrt + 1):
+                    this.field[snake.body[i - 1]].classList.add('snake-body_right-up');
+                    break;
+                case prev - curr === fieldSqrt && fieldSqrt - 1:
+                case prev - curr === 1 && -(fieldSqrt - 1):
+                    this.field[snake.body[i - 1]].classList.add('snake-body_right-down');
+                    break;
+                case 2:
+                case -2:
+                    this.field[snake.body[i - 1]].classList.add('snake-body_horizontal');
+                    break;
+                case -2 * fieldSqrt:
+                case 2 * fieldSqrt:
+                    this.field[snake.body[i - 1]].classList.add('snake-body_vertical');
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    renderSnakeHead(snake) {
+        this.field[snake.head].classList.add('snake');
+        switch (snake.direction) {
+            case snake.directions.right:
+                this.field[snake.head].classList.add('snake-head_right');
+                break;
+            case snake.directions.left:
+                this.field[snake.head].classList.add('snake-head_left');
+                break;
+            case snake.directions.up:
+                this.field[snake.head].classList.add('snake-head_up');
+                break;
+            case snake.directions.down:
+                this.field[snake.head].classList.add('snake-head_down');
+                break;
+        }
     }
 
     renderFrog(frog) {

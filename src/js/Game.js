@@ -65,6 +65,7 @@ export default class Game {
     
     resetGame() {
         this.moveSnake.snake.resetState();
+        this.moveFrog.move();
         this.score.resetScore();
         this.engine.updateField(this.score, this.moveSnake.snake, this.moveFrog.frog);
     }

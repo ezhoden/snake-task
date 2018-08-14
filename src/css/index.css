@@ -3,35 +3,95 @@
     flex-wrap: wrap;
     background-size: 5%;
     background-image: url('http://www.canbum.net/cdn/24/2014/600/minecraft-grass-block-texture_19030.jpg');
-    width: 90vh;
-    height: 90vh;
+    width: 640px;
+    height: 640px;
 }
 
 .field__block {
-    width: 5vh;
-    height: 5vh;
+    width: 64px;
+    height: 64px;
     display: flex;
-    background-size: 100%;
+    /* background-size: 100%; */
     justify-content: center;
     align-items: center;
 }
 
-.snake-head {
-    border-radius: 30%;
-    background-color: yellowgreen;
+.snake {
+    /* background-image: url('http://rembound.com/files/creating-a-snake-game-tutorial-with-html5/snake-graphics.png'); */
 }
 
-.snake-body {
-    border-radius: 40%;
-    background-color: yellowgreen;
+.snake-head_right {
+    background-image: url('http://rembound.com/files/creating-a-snake-game-tutorial-with-html5/snake-graphics.png');
+    background-position: -256px 0;
 }
 
-.snake-tail {
-    border-radius: 50%;
-    background-color: yellowgreen;
+.snake-head_left {
+    background-image: url('http://rembound.com/files/creating-a-snake-game-tutorial-with-html5/snake-graphics.png');
+    background-position: -192px -64px;
+}
+
+.snake-head_up {
+    background-image: url('http://rembound.com/files/creating-a-snake-game-tutorial-with-html5/snake-graphics.png');
+    background-position: -192px 0;
+}
+
+.snake-head_down {
+    background-image: url('http://rembound.com/files/creating-a-snake-game-tutorial-with-html5/snake-graphics.png');
+    background-position: -256px -64px;
+}
+
+.snake-body_left-up {
+    background-image: url('http://rembound.com/files/creating-a-snake-game-tutorial-with-html5/snake-graphics.png');
+    background-position: -128px -128px;
+}
+
+.snake-body_left-down {
+    background-image: url('http://rembound.com/files/creating-a-snake-game-tutorial-with-html5/snake-graphics.png');
+    background-position: -128px 0;
+}
+
+.snake-body_right-up {
+    background-image: url('http://rembound.com/files/creating-a-snake-game-tutorial-with-html5/snake-graphics.png');
+    background-position: 0 -64px;
+}
+
+.snake-body_right-down {
+    background-image: url('http://rembound.com/files/creating-a-snake-game-tutorial-with-html5/snake-graphics.png');
+    background-position: 0 0;
+}
+
+.snake-body_horizontal {
+    background-image: url('http://rembound.com/files/creating-a-snake-game-tutorial-with-html5/snake-graphics.png');
+    background-position: -64px 0;
+}
+
+.snake-body_vertical {
+    background-image: url('http://rembound.com/files/creating-a-snake-game-tutorial-with-html5/snake-graphics.png');
+    background-position: -128px -64px;
+}
+
+.snake-tail_right {
+    background-image: url('http://rembound.com/files/creating-a-snake-game-tutorial-with-html5/snake-graphics.png');
+    background-position: -256px -128px;
+}
+
+.snake-tail_left {
+    background-image: url('http://rembound.com/files/creating-a-snake-game-tutorial-with-html5/snake-graphics.png');
+    background-position: -192px -192px;
+}
+
+.snake-tail_down {
+    background-image: url('http://rembound.com/files/creating-a-snake-game-tutorial-with-html5/snake-graphics.png');
+    background-position: -256px -192px;
+}
+
+.snake-tail_up {
+    background-image: url('http://rembound.com/files/creating-a-snake-game-tutorial-with-html5/snake-graphics.png');
+    background-position: -192px -128px;
 }
 
 .frog {
+    background-size: 100%;
     background-image: url('https://www.icon2s.com/wp-content/uploads/2014/06/animal-icon-frog.png');
 }
 
