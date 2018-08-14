@@ -7,8 +7,6 @@ import MoveSnake from './MoveSnake';
 import GameGuard from './GameGuard';
 import MoveFrog from './MoveFrog';
 
-
-
 const config = {
     fieldSize: 100,
     snakeInterval: 150,
